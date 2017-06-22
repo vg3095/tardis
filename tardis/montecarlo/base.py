@@ -11,6 +11,7 @@ from tardis.util import quantity_linspace
 from tardis.io.util import HDFWriterMixin
 from tardis.montecarlo import montecarlo, packet_source
 from tardis.montecarlo.formal_integral import FormalIntegrator
+from tardis.io.util import HDFWriterMixin
 
 import numpy as np
 
