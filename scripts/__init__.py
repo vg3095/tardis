@@ -1,1 +1,1 @@
-from cmfgen2tardis import *
+from scripts.cmfgen2tardis import *
