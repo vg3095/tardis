@@ -30,20 +30,20 @@ matrix:
         - python: 2.7
           env:
             - COMPILER=gcc
-            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference"'
+            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference/"'
             - TEST_MODE='spectrum'
 
         - python: 2.7
           env:
             - COMPILER=clang
-            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference"'
+            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference/"'
             - TEST_MODE='spectrum'
 
         - os: osx
           language: generic
           env:
             - COMPILER=clang
-            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5"'
+            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference/"'
             - TEST_MODE='spectrum'
             - MINICONDA_URL='http://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh'
 
