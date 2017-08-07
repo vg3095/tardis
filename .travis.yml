@@ -21,6 +21,8 @@ env:
         - SETUP_CMD='test'
         - TEST_MODE='normal'
         - ATOM_DATA_URL='https://github.com/tardis-sn/tardis-atomdata/raw/master/kurucz_cd23_chianti_H_He.h5.zip'
+        - PLASMA_NLTE_REFERENCE_URL='https://github.com/vg3095/tardis-refdata/raw/plasma-ref2/plasma_reference/plasma_nlte_reference.h5'
+        - PLASMA_LTE_REFERENCE_URL='https://github.com/vg3095/tardis-refdata/raw/plasma-ref2/plasma_reference/plasma_lte_reference.h5'
         - MINICONDA_URL='http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh'
 
 matrix:
@@ -28,20 +30,20 @@ matrix:
         - python: 2.7
           env:
             - COMPILER=gcc
-            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5"'
+            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference/"'
             - TEST_MODE='spectrum'
 
         - python: 2.7
           env:
             - COMPILER=clang
-            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5"'
+            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference/"'
             - TEST_MODE='spectrum'
 
         - os: osx
           language: generic
           env:
             - COMPILER=clang
-            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5"'
+            - SETUP_CMD='test --args="--atomic-dataset=$HOME/kurucz_cd23_chianti_H_He.h5 --plasma-reference=$HOME/plasma_reference/"'
             - TEST_MODE='spectrum'
             - MINICONDA_URL='http://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh'
 
@@ -69,6 +71,10 @@ before_install:
     - if [[ $TEST_MODE == 'spectrum' ]]; then wget $ATOM_DATA_URL; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then unzip kurucz_cd23_chianti_H_He.h5.zip; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then mv kurucz_cd23_chianti_H_He.h5 $HOME/; fi
+    - wget $PLASMA_NLTE_REFERENCE_URL
+    - wget $PLASMA_LTE_REFERENCE_URL
+    - mkdir $HOME/plasma_reference/
+    - mv plasma_nlte_reference.h5 plasma_lte_reference.h5 $HOME/plasma_reference/
 
 install:
    - conda env create -f tardis_env27.yml
