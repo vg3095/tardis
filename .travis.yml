@@ -20,7 +20,7 @@ env:
         - ASTROPY_USE_SYSTEM_PYTEST=1
         - SETUP_CMD='test'
         - TEST_MODE='normal'
-        - TARDIS_REF_DATA_URL='https://github.com/vg3095/tardis-refdata.git'
+        - TARDIS_REF_DATA_URL='https://github.com/tardis-sn/tardis-refdata.git'
         - TARDIS_REF_VERSION='0.2'
         - MINICONDA_URL='http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh'
 
@@ -71,7 +71,8 @@ before_install:
     - if [[ $TEST_MODE == 'spectrum' ]]; then git lfs install --skip-smudge; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then git clone $TARDIS_REF_DATA_URL $HOME/tardis-refdata; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then cd $HOME/tardis-refdata; fi
-    - if [[ $TEST_MODE == 'spectrum' ]]; then git checkout plasma-ref2
+    - if [[ $TEST_MODE == 'spectrum' ]]; then git fetch origin pull/2/head:plasma-ref2; fi
+    - if [[ $TEST_MODE == 'spectrum' ]]; then git checkout plasma-ref2; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then git lfs pull --include="atom_data/kurucz_cd23_chianti_H_He.h5" origin; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then git lfs pull --include="plasma_reference/" origin; fi
     - if [[ $TEST_MODE == 'spectrum' ]]; then cd $HOME
