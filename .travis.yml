@@ -47,7 +47,7 @@ matrix:
 
 
         - python: 2.7
-          env: SETUP_CMD='test --coverage'
+          env: SETUP_CMD='test --coverage --args="--tardis-refdata=$HOME/tardis-refdata/"'
 
 addons:
   apt:
@@ -85,7 +85,7 @@ script:
     - CC=$COMPILER python setup.py $SETUP_CMD
 
 after_success:
-    - if [[ $SETUP_CMD == 'test --coverage' ]]; then coveralls; fi
+    - if [[ $SETUP_CMD == 'test --coverage --args="--tardis-refdata=$HOME/tardis-refdata/"' ]]; then coveralls; fi
 
 after_failure:
     - cat /home/travis/.pip/pip.log
